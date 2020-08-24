@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import Person from './Person/Person';
+import Person from "./Person/Person";
 
 class Persons extends Component {
   // static getDerivedStateFromProps(props, state) {
@@ -13,13 +13,17 @@ class Persons extends Component {
   // }
 
   shouldComponentUpdate(nextProps, nextState) {
-    console.log('[Persons.js] shouldComponentUpdate');
-    return true;
+    console.log("[Persons.js] shouldComponentUpdate");
+    if (nextProps.persons !== this.props.persons) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   getSnapshotBeforeUpdate(prevProps, prevState) {
-    console.log('[Persons.js] getSnapshotBeforeUpdate');
-    return { message: 'Snapshot!' };
+    console.log("[Persons.js] getSnapshotBeforeUpdate");
+    return { message: "Snapshot!" };
   }
 
   // componentWillUpdate() {
@@ -27,16 +31,16 @@ class Persons extends Component {
   // }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log('[Persons.js] componentDidUpdate');
+    console.log("[Persons.js] componentDidUpdate");
     console.log(snapshot);
   }
 
   componentWillUnmount() {
-    console.log('[Persons.js] componentWillUnmount');
+    console.log("[Persons.js] componentWillUnmount");
   }
 
   render() {
-    console.log('[Persons.js] rendering...');
+    console.log("[Persons.js] rendering...");
     return this.props.persons.map((person, index) => {
       return (
         <Person
@@ -44,7 +48,7 @@ class Persons extends Component {
           name={person.name}
           age={person.age}
           key={person.id}
-          changed={event => this.props.changed(event, person.id)}
+          changed={(event) => this.props.changed(event, person.id)}
         />
       );
     });
